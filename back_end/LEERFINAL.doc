@@ -1,0 +1,181 @@
+1) Crear carpeta de back y front
+
+2) Dirigirnos a la terminal  para iniciar el proyecto en node con npm init -y creando package.json
+
+3) Instalacion de dependencias
+  - Instalar framework nodejs : npm i express
+
+  - Instalar un modulo de MongoDB: npm i mongoose
+
+  - Instalar un middleware de Express que permite ver las peticiones que llegan al servidor: npm i morgan
+
+  - Instalar un modulo que nos permite mandar imagenes al servidor y que este las entienda: npm i multer
+
+  - Instalar modulo llamado dotenv y cross-end: npm i dotenv cross-env
+
+  - Instalar un modulo llamado cors, nos permite conectar el back con el front. npm i cors
+
+  - Instalar modulo llamado fs-extra, nos permite utilizar las promesas en nodejs y trabajar con IMAGENES
+
+  - Instalar modulo nodemon, sirve para ejecutar automaticamente el servidor para vez q guardamos escribiendo npm start: npm i nodemon -D 
+
+4) Estructura del proyecto:
+  - Index.js : Donde arrancaremos la aplicacion
+  - database.js: Conectarnos a la base de datos
+  - Carpeta "routes": Definimos las rutas o url de nuestro servidor
+  - Carpeta "models": Definimos el modelo de datos que vamos a guardar dentro de nuestra base de datos.
+
+5) Configuramos el index.js e iniciamos servidor: node back_end/index.js
+
+6) Vamos a crear dos carpetas en donde iran los archivos estaticos, es decir, las imagenes, archivos html,css y js. Llamado "public"/"subidas".
+Una vez que tengamos todo el codigo del front-end, lo vamos a mandar aqui para que sea publico al navegador.
+
+7) Luego conectaremos la base de datos MongoDB al servidor para poder guardar nuesra informacion ahi.
+Dentro del archivo database.js vamos a importar el modulo mongoose para darle inicio a la base de datos
+
+8) Definir el modelo de datos que utilizara nuestra base de datos dentro de la carpeta "models"
+
+9) Variables de Entorno: Vamos a reemplazar la URI/ URL de nuestra base de datos por una variable de entorno, la cual es mas segura. Para ello, crearemos un archivo llamado ".env".
+
+A continuacion borraremos:
+const URI = "mongodb://localhost/JavaScriptDB"; y dentro del archivo ".env" crearemos una variable con la URL. Y luego volvermeos al archivo database.js y escribiremos:
+const URI = process.env.MONGODB_URI;
+
+La ventaja de utilizar una variable del entorno, es que al archivo correspondiente, no lo vamos a subir a ningun servidor ni a ningun lado. Simplemente es para este conmputador
+
+
+
+
+
+
+Para definir y especificar en que entorno nos encontramos, es decir, si estamos en produccion o en desarrollo, tenemos que utilizar el modulo "Cross-Env", ya que el modulo "Dotenv" se utiliza unicamente en el entorno de desarrollo.
+Para ello, nos dirigiremos al "package.json" y dentro de "scripts" definiremos:
+
+Si ejecutamos npm run dev ---> Ejecutamos el entorno de desarrollo 
+Si ejecutamos npm start ---> Ejecutamos el entorno de produccion. 
+
+De esta manera, cuando iniciemos el entorno de desarrollo, automaticamente vamos a requerir el modulo "dotenv" para utilizar las variables del entorno y en caso de que iniciemos el entorno de produccion, no se requerira nada.
+
+9) REST API: => bookRoutes.js
+  Definimos las peticiones que recibira nuestra REST API/BackEnd y su manera de responder a ellas.
+
+10)FrontEnd - Npm modulos - WebPack
+  Vamos a diseñar, crear las carpetas, archivos, instalar las dependencias, etc que utilizaremos en el front-end.
+  Anteriormente habiamos instalado modulos/dependencias para el Back-End pero ahora, instalaremos dependencias que necesitaremos para el Front-End.
+
+  Para ello, utilizaremos una herramienta llamada WebPackJS => Es una herramienta/modulo que toma todos tus archivos del Front-End (que desarrollamos en el entorno de desarrollo) y los prepara para el entorno de produccion.
+
+  Es decir que cuando terminemos el desarrollo del front-end. 
+  Con WebPack vamos a convertir todo el codigo del front-end en codigo estandar de html,css y js, y mover dicho codigo a la carpeta "Public" situada en el "Back-End". 
+  Al final, lo unico q vamos a desplegar va a ser la carpeta "public"
+
+  Para su instalacion, necesitamos escribir en la terminal lo siguiente: "npm i webpack -D" 
+
+  Tambien vamos a utilizar otros modulos, que van a complementar a WebPack, los cuales son:
+  - npm webpack-cli  -D
+
+  - npm html-webpack-plugin -D => Nos permite decirle a WebPack como trabajar con archivos html.
+
+  - npm css-loader -D => Nos permite cargar archivos CSS dentro de JavaScript
+  - npm style-loader -D
+
+  - npm mini-css-extract-plugin -D => Nos permite extraer el codigo CSS y minimificarlo.
+
+  - npm webpack-dev-server -D => Nos permite trabajar con un servidor de desarrollo (Aunque creo q es innecesario xq ya tenemos un plugin en el VSCode) 
+  
+  - npm timeago.js -D => Nos sirve al momento de estar mostrando fechas, pues simplemente nos permite cambiar el formato de la fecha por un formato de 3/5 horas atras a partir del momento actual  
+
+  ACLARACION: -D es para que se nos agregue en depedencias de desarrollo (devDependencies) y no en en dependencias de produccion(Dependencies)
+
+11) Estructura basica del Front-End:
+  - Index.html => Contiene la interface, inicio del html
+  
+  - App.js => Es el archivo principal del Front-end (Similar al Index.js del back-end).
+
+  - Carpeta "models" => Definir modelo de datos que enviara el navegador al servidor
+  
+  - Carpeta "Services" => Nos permitira interactuar con nuestra REST API
+  
+  - Carpeta "styles" => Contendra el estilo de nuestra aplicacion
+  
+  - UI.js => Nos permite manipular el DOM
+
+12) Configuracion del WebPack
+  Para poder configurar WebPack, vamos a tener que crear un archivo llamado "webpack.config.js" al inicio de nuestro proyecto.
+  
+  Para convertir el codigo, tenemos que escribir en la terminal: "npm run build" (ya que hicimos unas modificaciones en el package.json) y veremos como automaticamente se nos genera un archivo "bundle.js" dentro de la carpeta "public".
+
+  WebPack, ademas de convertir y enviar los archivos a la carpeta "public", tambien enlaza los archivos "html".
+  Es decir: Enlaza los archivos "JS" y "CSS" con los de "html". 
+  Una vez enlazados, los coloca dentro de la carpeta "public".
+
+  Nunca debemos modificar el codigo que esta dentro de la carpeta "public" ya que son residentes del codigo del front-end. Es decir, si modificamos el del front-end y despues utilizamos el npm run build, vamos a modificarlo tambien.-
+
+13) Desarrollo de Interface del Usuario:
+  Comenzaremos por instalar los modulos que necesitamos para desarrollar una interface.
+  - Bootstrap 4: Nos dirigimos a su pagina, copiamos la CDN y lo pegamos en el html.
+  - Modulo Animate.css: Nos dirigimos a su pagina, copiamos la CDN y lo pegamos en el html.
+  Recordatorio: Para que el CSS se vea plasmado en la web, tenemos que importar dicho archivo en el "app.js"
+
+  ACLARACIONES de Package.json:     
+
+    /* Determina que estamos en desarrollo y nos genera un servidor en el localhost:4200 (servidor creado por Express - back-end)
+    
+    "dev": " cross-env NODE_ENV=development nodemon back_end/index.js --ignore front_end",
+
+    PD: Cuando iniciamos servidor del back-end, va a ignorar completamente el front-end para que no se reinie a cada rato el servidor 
+    
+  
+
+    /* Determina que estamos en produccion */
+
+    "start": "cross-env NODE_ENV=production node back_end/index.js",
+
+    PD: Este comando ejecutara Heroku cuando lo subamos para dar inicio al servidor
+
+    Cuando inicialice el servidor, le va a enviar como contenido al navegador todo lo que se encuentra en "public" (el cual es todo el contenido del front-end)
+
+    En principio no va a mostrar nada, pero una vez que ejecutemos "npm run build", dicha carpeta "public" se va a llenar con todo el codigo del front-end y ahi si mostrara todo.
+
+
+
+
+
+    /* Nos convierte todos los archivos del front con el webpack y nos lo manda a la carpeta "public" del "back-end" para verlo plasmado en el navegador web cuando iniciemos servidor back-end.
+    Lo utilizaremos para plasmar el codigo front- definitivo*/
+    
+    "build": "cross-env NODE_ENV=production webpack",
+
+
+
+    /* Servidor exclusivo de desarrolo  para evitarnos tener que escribir todo el tiempo npm run build. Apenas hagamos un cambio, se plasma en el servidor de desarrollo
+    (servidor creado por Webpack - Front-end | similar a live-server)
+
+    "server:dev": "webpack-dev-server"
+
+  Existe una pagina llamada https://bootswatch.com/ que nos permite cambiar los colores de por defecto que nos brinda Bootstrap 4
+
+14) Javascript Service Clases, fetch y AJAX.
+
+  Crearemos un archivo llamado "BookServices" en la carpeta Service (del front) y ahi definiremos todas las peticiones que le mandara el navegador al servidor
+
+  Como tambien nos dirigiremos al archivo "app.js", la cual sera nuestro archivo principal del lado del front-end (similar al "index.js") y crearemos un objeto con los datos que componen al formulario.
+
+15) Renderizando Datos & Fetch
+
+  Anteriormente, definimos las peticiones que le mandara el navegador al servidor y a su vez el objeto (Es decir, los datos que colocamos en los inputs, los almacenamos en un objeto) que le mandara al servidor.
+
+  A continuacion, crearemos los metodos que van a interactuar con el navegador (DOM) dentro del archivo "UI.js". 
+  Es decir, crearemos metodos para que podamos mostrar lo que contiene la base de datos en el navegador, podamos crear objetos, eliminarlos, etc
+  
+  Dichos metodos utilizaran el objeto "formData" del "app.js" con la finalidad de poder interactuar el navegador con el servidor.
+
+  Por lo que una vez creado todos esos metodos, los importaremos al archivo "app.js" y de ahi le daremos a cada metodo creado anteriormente al objeto "formData" como parametro.
+  
+16) Detalles
+
+
+
+
+MODULOS FS_EXTRA Y MULTER INTERESANTES, nos permiten trabajar con imagenes para enviar al servidor
+

@@ -1,0 +1,4 @@
+//Sirve para definir que archivos no tenemos que subir al servidor
+
+node_modules
+.env

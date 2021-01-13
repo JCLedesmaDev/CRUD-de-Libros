@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///front_end/styles/app.css"],"names":[],"mappings":"AAAA;EACE,mBAAmB;AACrB","file":"css/bundle.css","sourcesContent":["body{\r\n  background: #badc58;\r\n}\r\n"],"sourceRoot":""}
